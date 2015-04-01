@@ -7,7 +7,7 @@ var userController = require('./controllers/userresource');
 var artikelController = require('./controllers/artikelresource');
 
 // DB Handle
-mongoose.connect('mongodb://localhost:27017/kundenverwaltung');
+mongoose.connect('mongodb://localhost:27017/database_01');
 
 // Express initiieren
 var app = express();
