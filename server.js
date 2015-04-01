@@ -2,8 +2,9 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var kundeController = require('./controllers/kunde');
-var userController = require('./controllers/user');
+var kundeController = require('./controllers/kunderesource');
+var userController = require('./controllers/userresource');
+var artikelController = require('./controllers/artikelresource');
 
 // DB Handle
 mongoose.connect('mongodb://localhost:27017/kundenverwaltung');
@@ -13,7 +14,7 @@ var app = express();
 
 // bodyParser für POST PUT 
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 
 // Express Pfad
@@ -39,9 +40,19 @@ router.route('/users')
 router.route('/users/:user_id')
     .delete(userController.deleteUser);
 
+// Pfad /artikelverwaltung
+router.route('/artikelverwaltung')
+    .post(artikelController.postArtikelverwaltung)
+    .get(artikelController.getArtikelverwaltung);
+
+//Pfad /artikelverwaltung/:artikel_id
+router.route('/artikelverwaltung/:artikel_id')
+    .get(artikelController.getArtikel)
+    .put(artikelController.putArtikel)
+    .delete(artikelController.deleteArtikel);
+
 // Pfade mit /api Basispfad bekannt machen
 app.use('/api', router);
 
 // Start server
 app.listen(3000);
-
