@@ -52,8 +52,21 @@ router.route('/artikelverwaltung/:artikel_id')
     .put(artikelController.putArtikel)
     .delete(artikelController.deleteArtikel);
 
+//Html Seite mit get Text = "Hello world" als h1 Überschrift
+app.get('/',function(req, res){
+    res.send("<h1>Hello world.</h1>");
+});
+
+// app.use Block
 // Pfade mit /api Basispfad bekannt machen
 app.use('/api', router);
+
+//Test Fehlerbehandlung mit express (immer als letztes Errorhandling laut doku)
+//TODO klappt bei throw new Error() und allen anderen Fehlern in server.js sonst im Moment nicht
+app.use(function(err, req, res){
+   console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
 // Start server
 app.listen(3000);

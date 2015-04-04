@@ -19,10 +19,21 @@ exports.postArtikelverwaltung  = function (req, res) {
 
     // Speichern und Fehlerbehandlung
     artikel.save(function (err) {
-        if (err)
+        if (err) {
+            console.log("[INFO] Fehler beim speichern eines Artikels.\n"
+                        + "Bezeichnung: "
+                        + req.body.bezeichnung + "\n"
+                        + "Anzahl: "
+                        + req.body.anzahl + "\n"
+                        + "Rating: "
+                        + artikel.rating
+            );
+            res.statusCode = 404;
             res.send(err);
-
-        res.json({ message: 'Artikel in Artikelverwaltung aufgenommen!', data: artikel });
+        }
+        else {
+            res.json({message: 'Artikel in Artikelverwaltung aufgenommen!', data: artikel});
+        }
     });
 };
 
