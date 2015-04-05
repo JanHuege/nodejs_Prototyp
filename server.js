@@ -7,7 +7,7 @@ var kundeController = require('./controllers/kunderesource');
 var userController = require('./controllers/userresource');
 var artikelController = require('./controllers/artikelresource');
 
-// DB Handle
+// DB Handle, mongoose = Wrapper für  mongo
 mongoose.connect('mongodb://localhost:27017/kundenverwaltung');
 
 // Express initiieren
@@ -17,6 +17,7 @@ var app = express();
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(bodyParser.json());
 
 // Express Pfad
 var router = express.Router();
@@ -70,3 +71,4 @@ app.use(function(err, req, res){
 
 // Start server
 app.listen(3000);
+console.log('running on port 3000');
