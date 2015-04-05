@@ -64,10 +64,11 @@ app.use('/api', router);
 
 //Test Fehlerbehandlung mit express (immer als letztes Errorhandling laut doku)
 //TODO klappt bei throw new Error() und allen anderen Fehlern in server.js sonst im Moment nicht
-app.use(function(err, req, res){
-   console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
+//TODO klappt sogar global, aber macht Probleme wenn eine Ressource schon gesendet wurde, da der HEader nichtmehr gesetzt werden kann
+//app.use(function(err, req, res){
+//   console.error(err.stack);
+//    res.status(500).send('Something broke!');
+//});
 
 // Start server
 app.listen(3000);

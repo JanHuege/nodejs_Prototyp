@@ -38,7 +38,7 @@ exports.postArtikelverwaltung  = function (req, res) {
 };
 
 //GET
-// Endpunkt erstellen /api/kunden
+// Endpunkt erstellen /api/artikelverwaltung
 exports.getArtikelverwaltung = function (req, res) {
     // Kunde model rufen um Kunden zu suchen .find()
     Artikel.find(function (err, artikelverwaltung) {
@@ -50,14 +50,17 @@ exports.getArtikelverwaltung = function (req, res) {
 };
 
 //GET
-// Endpunkt für einzelnen Kunden mit id /api/kunden/:kunde_id
+// Endpunkt für einzelnen Artikel mit id /api/artikelverwaltung/:artikel_id
 exports.getArtikel = function (req, res) {
     // Kunde model verwenden um spezifischen Kunden anhand der Id zu finden
     Artikel.findById(req.params.artikel_id, function (err, artikel) {
-        if (err)
-            res.send(err);
-
-        res.json(artikel);
+        if (err){
+            //res.send(err);
+            res.status(404).send('Es gibt keinen Artikel mit der Id: ' + req.params.artikel_id);
+        }
+        else{
+            res.json(artikel);
+        }
     });
 };
 
