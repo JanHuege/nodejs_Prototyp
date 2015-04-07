@@ -14,10 +14,20 @@ exports.postKunden = function (req, res) {
 
     // Speichern und Fehlerbehandlung
     kunde.save(function (err) {
-        if (err)
+        if (err) {
+            console.log("[INFO] Fehler beim speichern eines Kunden.\n"
+                + "Name: "
+                + req.body.name + "\n"
+                + "Vorname: "
+                + req.body.vorname + "\n"
+                + "Alter: "
+                + req.body.alter
+            );
+            res.statusCode = 404;
             res.send(err);
-
-        res.json({ message: 'Kunde in Kundenverwaltung aufgenommen!', data: kunde });
+        }
+        else
+            res.json({ message: 'Kunde in Kundenverwaltung aufgenommen!', data: kunde });
     });
 };
 
