@@ -27,6 +27,7 @@ exports.getUsers = function (req, res) {
 };
 
 // DELETE
+//TODO Löschen check ob überhaupt da
 exports.deleteUser = function (req, res) {
     User.findByIdAndRemove(req.params.user_id, function (err) {
         if (err)

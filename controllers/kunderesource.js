@@ -80,10 +80,23 @@ exports.putKunde = function (req, res) {
 // Endpunkt für löschen von speziellem Kunden mit{id} /api/kunden/:kunde_id
 exports.deleteKunde = function (req, res) {
     // Kunde mit {id} suchen und löschen
-    Kunde.findByIdAndRemove(req.params.kunde_id, function (err) {
-        if (err)
-            res.send(err);
-
-        res.json({ message: 'Kunde gelöscht!' });
+    // Mit Test ob Kunde überhaupt vorhanden
+    // TODO Bei allen anderen Ressource.js files auch anpassen
+    Kunde.count({_id: req.params.kunde_id}, function (err, count){
+        if(count == 0){
+            //document exists });
+            res.json({ message: 'Kein Kunde mit dieser Id vorhanden!'})
+        }
+        else{
+            Kunde.findByIdAndRemove(req.params.kunde_id, function (err) {
+                if (err) {
+                    res.send(err);
+                }
+                else{
+                    res.json({ message: 'Kunde gelöscht!' });
+                }
+            });
+        }
     });
+
 };

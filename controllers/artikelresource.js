@@ -86,6 +86,7 @@ exports.putArtikel = function (req, res) {
 };
 
 //DELETE
+//TODO Löschen check ob überhaupt da
 // Endpunkt für löschen von speziellem Kunden mit{id} /api/kunden/:kunde_id
 exports.deleteArtikel = function (req, res) {
     // Kunde mit {id} suchen und löschen
