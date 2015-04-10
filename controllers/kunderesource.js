@@ -84,7 +84,6 @@ exports.deleteKunde = function (req, res) {
     // TODO Bei allen anderen Ressource.js files auch anpassen
     Kunde.count({_id: req.params.kunde_id}, function (err, count){
         if(count == 0){
-            //document exists });
             res.json({ message: 'Kein Kunde mit dieser Id vorhanden!'})
         }
         else{
