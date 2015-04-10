@@ -1,8 +1,9 @@
 // Import model
 var Artikel = require('../models/artikel');
 
+//TODO Post nur mit zulässigen Werten evtl. Funktion um Werte zu checken oder ähnliches
 //POST
-// Endpunkt erstellen /api/kunden
+// Endpunkt erstellen /api/artikelverwaltung
 exports.postArtikelverwaltung  = function (req, res) {
     // kunde Model Instanz erstellen
     var artikel = new Artikel();
@@ -64,8 +65,9 @@ exports.getArtikel = function (req, res) {
     });
 };
 
+//TODO Put bei anderen anpassen evtl. weiterentwickeln
 //PUT
-// Endpunkt um Kunden zu aktualisieren(momentan nur alter) /api/kunden/:kunde_id
+// Endpunkt um Artikel zu aktualisieren(momentan nur alter) /api/artikelverwaltung/:artikel_id
 exports.putArtikel = function (req, res) {
     // Kunde mit {id} finden
     Artikel.findById(req.params.artikel_id, function (err, artikel) {
@@ -73,7 +75,18 @@ exports.putArtikel = function (req, res) {
             res.send(err);
 
         // Update alter
-        artikel.anzahl = req.body.anzahl;
+        if(req.body.bezeichnung != null && req.body.bezeichnung != "")
+            artikel.bezeichnung = req.body.bezeichnung;
+        if(req.body.rating >= 0 && req.body.rating <= 10)
+            artikel.rating = req.body.rating;
+        else{
+            res.status(400).send('Ein Rating von ' + req.body.rating + ' ist nicht zulässig!');
+            return;
+        }
+        if(req.body.anzahl >= 0)
+            artikel.anzahl = req.body.anzahl;
+
+
 
         // Speichern und Fehlerbehandlung
         artikel.save(function (err) {
