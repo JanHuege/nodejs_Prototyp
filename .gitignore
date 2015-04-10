@@ -6,7 +6,7 @@ ehthumbs.db
 Desktop.ini
 
 # Directory-based project format:
-.idea/
+.idea
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
