@@ -45,13 +45,16 @@ router.route('/users/:user_id')
 // Pfad /artikelverwaltung
 router.route('/artikelverwaltung')
     .post(artikelController.postArtikelverwaltung)
-    .get(artikelController.getArtikelverwaltung);
+    .get(artikelController.getArtikelverwaltung)
 
 //Pfad /artikelverwaltung/:artikel_id
 router.route('/artikelverwaltung/:artikel_id')
     .get(artikelController.getArtikel)
     .put(artikelController.putArtikel)
     .delete(artikelController.deleteArtikel);
+
+router.route('/artikelverwaltung/:artikel_bezeichnung')
+    .get(artikelController.getArtikel);
 
 //Html Seite mit get Text = "Hello world" als h1 Überschrift
 app.get('/',function(req, res){

@@ -1,6 +1,7 @@
 // Imports
 var mongoose = require('mongoose');
 
+//TODO Valdidators nachlesen und ausprobieren
 // Aufbau von JSON Daten für Kunden
 var UserSchema = new mongoose.Schema({
     username: String,

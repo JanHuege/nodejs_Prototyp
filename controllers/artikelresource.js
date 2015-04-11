@@ -10,9 +10,14 @@ exports.postArtikelverwaltung  = function (req, res) {
 
     // Kunde Objekt Parameter setzen
     artikel.bezeichnung = req.body.bezeichnung;
-    artikel.anzahl = req.body.anzahl;
 
-    if (req.body.rating == null) {
+    if (req.body.anzahl == null || req.body.rating < 0) {
+        artikel.anzahl = 0;
+    }
+    else
+        artikel.anzahl = req.body.anzahl;
+
+    if (req.body.rating == null || req.body.rating > 10 || req.body.rating < 0) {
         artikel.rating = 0;
     }
     else
@@ -65,26 +70,45 @@ exports.getArtikel = function (req, res) {
     });
 };
 
+//TODO Problem momentan Leeres Array
+//Get
+// Endpunkt für einzelnen ARtikel mit bezeichnung /api/artikelverwaltung/:artikel_bezeichnung
+exports.getArtikel = function(req, res){
+    Artikel.find({bezeichnung: req.params.artikel_bezeichnung}, function(err, artikel){
+        if(err){
+            res.status(404).send('Es gibt keinen Artikel mit der Bezeichnung: ' + req.params.artikel_bezeichnung);
+        }
+        else{
+            res.json(artikel);
+        }
+
+    });
+};
+
 //TODO Put bei anderen anpassen evtl. weiterentwickeln
 //PUT
 // Endpunkt um Artikel zu aktualisieren(momentan nur alter) /api/artikelverwaltung/:artikel_id
 exports.putArtikel = function (req, res) {
-    // Kunde mit {id} finden
+    // Artikel mit {id} finden
     Artikel.findById(req.params.artikel_id, function (err, artikel) {
         if (err)
             res.send(err);
 
-        // Update alter
+        // Update Artikel
         if(req.body.bezeichnung != null && req.body.bezeichnung != "")
             artikel.bezeichnung = req.body.bezeichnung;
         if(req.body.rating >= 0 && req.body.rating <= 10)
             artikel.rating = req.body.rating;
-        else{
+        else if(req.body.rating != null){
             res.status(400).send('Ein Rating von ' + req.body.rating + ' ist nicht zulässig!');
             return;
         }
         if(req.body.anzahl >= 0)
             artikel.anzahl = req.body.anzahl;
+        else if(req.body.anzahl < 0){
+            res.status(400).send('Es können nicht weniger als 0 Artikel existieren!');
+            return;
+        }
 
 
 
