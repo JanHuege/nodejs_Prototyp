@@ -11,6 +11,7 @@ exports.postKunden = function (req, res) {
     kunde.name = req.body.name;
     kunde.vorname = req.body.vorname;
     kunde.alter = req.body.alter;
+    kunde.geschlecht = req.body.geschlecht;
 
     // Speichern und Fehlerbehandlung
     kunde.save(function (err) {
@@ -20,6 +21,8 @@ exports.postKunden = function (req, res) {
                 + req.body.name + "\n"
                 + "Vorname: "
                 + req.body.vorname + "\n"
+                + "Geschlecht: "
+                + req.body.geschlecht + "\n"
                 + "Alter: "
                 + req.body.alter
             );
@@ -64,7 +67,20 @@ exports.putKunde = function (req, res) {
             res.send(err);
 
         // Update alter
-        kunde.alter = req.body.alter;
+        if(req.body.alter != null){
+            kunde.alter = req.body.alter;
+        }
+        if(req.body.name != null){
+            kunde.name = req.body.name;
+        }
+        if(req.body.vorname != null){
+            kunde.vorname = req.body.vorname;
+        }
+        if(req.body.geschlecht != null){
+            kunde.geschlecht = req.body.geschlecht;
+        }
+
+
 
         // Speichern und Fehlerbehandlung
         kunde.save(function (err) {
