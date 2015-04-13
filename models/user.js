@@ -1,12 +1,12 @@
 // Imports
 var mongoose = require('mongoose');
+var validators = require('mongoose-validators');
 
-//TODO Valdidators nachlesen und ausprobieren
 // Aufbau von JSON Daten für Kunden
 var UserSchema = new mongoose.Schema({
-    username: String,
+    username: {type: String, validate: [validators.isAlphanumeric()]},
     password: String,
-    email: String
+    email: {type: String, validate: [validators.isEmail()]}
 });
 
 // Export the Mongoose modelf

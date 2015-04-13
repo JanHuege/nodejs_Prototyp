@@ -9,10 +9,13 @@ exports.postUsers = function (req, res) {
     user.email = req.body.email;
 
     user.save(function (err) {
-        if (err)
+        if (err) {
             res.send(err);
+        }
+        else{
+            res.json({ message: 'Neuer User registriert!', data: user });
+        }
 
-        res.json({ message: 'Neuer User registriert!', data: user });
     });
 };
 
