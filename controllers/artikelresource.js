@@ -69,11 +69,11 @@ exports.getArtikel = function (req, res) {
     });
 };
 
-//TODO Problem momentan Leeres Array
+//TODO Problem momentan Leeres Array - solved
 //Get
-// Endpunkt für einzelnen ARtikel mit bezeichnung /api/artikelverwaltung/:artikel_bezeichnung
-exports.getArtikel = function(req, res){
-    Artikel.find({bezeichnung: req.params.artikel_bezeichnung}, function(err, artikel){
+// Endpunkt für einzelnen ARtikel mit bezeichnung /api/artikelverwaltung/:bezeichnung
+exports.getArtikelByBezeichnung = function(req, res){
+    Artikel.find({bezeichnung: req.params.bezeichnung}, function(err, artikel){
         if(err){
             res.status(404).send('Es gibt keinen Artikel mit der Bezeichnung: ' + req.params.artikel_bezeichnung);
         }
