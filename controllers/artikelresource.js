@@ -1,7 +1,6 @@
 // Import model
 var Artikel = require('../models/artikel');
 
-//TODO Post nur mit zulässigen Werten evtl. Funktion um Werte zu checken oder ähnliches
 //POST
 // Endpunkt erstellen /api/artikelverwaltung
 exports.postArtikelverwaltung  = function (req, res) {
@@ -85,7 +84,6 @@ exports.getArtikel = function(req, res){
     });
 };
 
-//TODO Put bei anderen anpassen evtl. weiterentwickeln
 //PUT
 // Endpunkt um Artikel zu aktualisieren(momentan nur alter) /api/artikelverwaltung/:artikel_id
 exports.putArtikel = function (req, res) {

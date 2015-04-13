@@ -2,8 +2,8 @@
 var mongoose = require('mongoose');
 var validators = require('mongoose-validators');
 
+//TODO Validationmessages
 //TODO UTF-8 wegen äöü
-//Definition RegExp Nachname
 var reNachname = new RegExp(/[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)?$/);
 var reVorname = new RegExp(/([A-ZÄÖÜ][a-zäöüß]+([- ][A-ZÄÖÜ][a-zäöüß]+)?)+$/);
 

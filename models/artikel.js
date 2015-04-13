@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var validators = require('mongoose-validators');
 
-// Aufbau von JSON Daten für Kunden
+// Aufbau von JSON Daten für Artikel
 var ArtikelSchema = new mongoose.Schema({
     bezeichnung: String,
     anzahl: {type: Number, min: 0, validate: [validators.isInt()]},
