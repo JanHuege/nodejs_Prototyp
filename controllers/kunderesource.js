@@ -79,9 +79,6 @@ exports.putKunde = function (req, res) {
         if(req.body.geschlecht != null)
             kunde.geschlecht = req.body.geschlecht;
 
-
-
-
         // Speichern und Fehlerbehandlung
         kunde.save(function (err) {
             if (err){
