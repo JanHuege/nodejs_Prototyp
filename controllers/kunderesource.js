@@ -67,18 +67,18 @@ exports.putKunde = function (req, res) {
             res.send(err);
 
         // Update alter
-        if(req.body.alter != null){
+        if(req.body.alter != null)
             kunde.alter = req.body.alter;
-        }
-        if(req.body.name != null){
+
+        if(req.body.name != null)
             kunde.name = req.body.name;
-        }
-        if(req.body.vorname != null){
+
+        if(req.body.vorname != null)
             kunde.vorname = req.body.vorname;
-        }
-        if(req.body.geschlecht != null){
+
+        if(req.body.geschlecht != null)
             kunde.geschlecht = req.body.geschlecht;
-        }
+
 
 
 

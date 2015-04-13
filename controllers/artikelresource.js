@@ -95,29 +95,22 @@ exports.putArtikel = function (req, res) {
             res.send(err);
 
         // Update Artikel
-        if(req.body.bezeichnung != null && req.body.bezeichnung != "")
+        if(req.body.bezeichnung != null)
             artikel.bezeichnung = req.body.bezeichnung;
-        if(req.body.rating >= 0 && req.body.rating <= 10)
+        if(req.body.rating != null)
             artikel.rating = req.body.rating;
-        else if(req.body.rating != null){
-            res.status(400).send('Ein Rating von ' + req.body.rating + ' ist nicht zulässig!');
-            return;
-        }
-        if(req.body.anzahl >= 0)
+        if(req.body.anzahl != null)
             artikel.anzahl = req.body.anzahl;
-        else if(req.body.anzahl < 0){
-            res.status(400).send('Es können nicht weniger als 0 Artikel existieren!');
-            return;
-        }
-
-
 
         // Speichern und Fehlerbehandlung
         artikel.save(function (err) {
-            if (err)
+            if (err){
                 res.send(err);
+            }
+            else{
+                res.json(artikel);
+            }
 
-            res.json(artikel);
         });
     });
 };
