@@ -68,10 +68,13 @@ exports.putKunde = function (req, res) {
 
         // Speichern und Fehlerbehandlung
         kunde.save(function (err) {
-            if (err)
+            if (err){
                 res.send(err);
-
-            res.json(kunde);
+                console.log('[INFO] Fehler Put Kunde!');
+            }
+            else {
+                res.json(kunde);
+            }
         });
     });
 };
