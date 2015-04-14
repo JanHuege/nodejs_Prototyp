@@ -1,6 +1,8 @@
 // Import model
 var Kunde = require('../models/kunde');
+var User = require('../models/user');
 
+//TODO Anpassungen wegen ref User und ref in Model für Kunden verbessern
 //POST
 // Endpunkt erstellen /api/kunden
 exports.postKunden = function (req, res) {
@@ -12,6 +14,7 @@ exports.postKunden = function (req, res) {
     kunde.vorname = req.body.vorname;
     kunde.alter = req.body.alter;
     kunde.geschlecht = req.body.geschlecht;
+    kunde.user = req.body.user;
 
     // Speichern und Fehlerbehandlung
     kunde.save(function (err) {
@@ -58,6 +61,23 @@ exports.getKunde = function (req, res) {
     });
 };
 
+//TODO laden von "UserObject" - done
+//GET
+// Endpunkt für einzelnen Kunden mit id /api/kunden/user/:userId
+exports.getKundeByUserId = function (req, res) {
+    // Kunde model verwenden um spezifischen Kunden anhand der userId zu finden
+    Kunde.find({user: req.params.userId}, function (err, kunde) {
+        if (err)
+            res.send(err);
+        var user = new User();
+        Kunde.populate(kunde,{path: 'user'},function(err, user){
+            res.json(kunde);
+        });
+        //res.json(kunde);
+    });
+};
+
+
 //PUT
 // Endpunkt um Kunden zu aktualisieren(momentan nur alter) /api/kunden/:kunde_id
 exports.putKunde = function (req, res) {
@@ -78,9 +98,6 @@ exports.putKunde = function (req, res) {
 
         if(req.body.geschlecht != null)
             kunde.geschlecht = req.body.geschlecht;
-
-
-
 
         // Speichern und Fehlerbehandlung
         kunde.save(function (err) {

@@ -1,6 +1,7 @@
 // Imports
 var mongoose = require('mongoose');
 var validators = require('mongoose-validators');
+var Schema = mongoose.Schema;
 
 //TODO Validationmessages
 //TODO UTF-8 wegen הצü
@@ -12,8 +13,10 @@ var KundeSchema   = new mongoose.Schema({
   name: {type: String, validate: reNachname },
   vorname: {type: String, validate: reVorname},
   geschlecht: {type: String, enum: ['M', 'W']},
-  alter: {type: Number, min: 18}
+  alter: {type: Number, min: 18},
+  user: {type: Schema.ObjectId, ref: 'User', required: false}
 });
 
 // Export the Mongoose model
 module.exports = mongoose.model('Kunde', KundeSchema);
+

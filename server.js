@@ -33,6 +33,10 @@ router.route('/kunden/:kunde_id')
     .put(kundeController.putKunde)
     .delete(kundeController.deleteKunde);
 
+//Pfad /kunden/user/:userId
+router.route('/kunden/user/:userId')
+    .get(kundeController.getKundeByUserId);
+
 //Pfad /users
 router.route('/users')
     .get(userController.getUsers)
@@ -45,7 +49,7 @@ router.route('/users/:user_id')
 // Pfad /artikelverwaltung
 router.route('/artikelverwaltung')
     .post(artikelController.postArtikelverwaltung)
-    .get(artikelController.getArtikelverwaltung)
+    .get(artikelController.getArtikelverwaltung);
 
 //Pfad /artikelverwaltung/:artikel_id
 router.route('/artikelverwaltung/:artikel_id')
@@ -53,8 +57,9 @@ router.route('/artikelverwaltung/:artikel_id')
     .put(artikelController.putArtikel)
     .delete(artikelController.deleteArtikel);
 
-router.route('/artikelverwaltung/:artikel_bezeichnung')
-    .get(artikelController.getArtikel);
+//Pfad /artikelverwaltung/name/:bezeichnung
+router.route('/artikelverwaltung/name/:bezeichnung')
+    .get(artikelController.getArtikelByBezeichnung);
 
 //Html Seite mit get Text = "Hello world" als h1 Überschrift
 app.get('/',function(req, res){
