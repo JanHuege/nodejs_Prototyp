@@ -15,6 +15,7 @@ exports.postKunden = function (req, res) {
     kunde.alter = req.body.alter;
     kunde.geschlecht = req.body.geschlecht;
     kunde.user = req.body.user;
+    kunde.adresse = req.body.adresse;
 
     // Speichern und Fehlerbehandlung
     kunde.save(function (err) {

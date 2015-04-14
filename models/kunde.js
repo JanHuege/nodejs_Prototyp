@@ -1,6 +1,5 @@
 // Imports
 var mongoose = require('mongoose');
-var validators = require('mongoose-validators');
 var Schema = mongoose.Schema;
 
 //TODO Validationmessages
@@ -14,7 +13,8 @@ var KundeSchema   = new mongoose.Schema({
   vorname: {type: String, validate: reVorname},
   geschlecht: {type: String, enum: ['M', 'W']},
   alter: {type: Number, min: 18},
-  user: {type: Schema.ObjectId, ref: 'User', required: false}
+  user: {type: Schema.ObjectId, ref: 'User', required: false},
+  adresse:{type: Schema.ObjectId, ref: 'Adresse', required: true}
 });
 
 // Export the Mongoose model
