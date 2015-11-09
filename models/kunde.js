@@ -14,7 +14,7 @@ var KundeSchema   = new mongoose.Schema({
   geschlecht: {type: String, enum: ['M', 'W']},
   alter: {type: Number, min: 18},
   user: {type: Schema.ObjectId, ref: 'User', required: false},
-  adresse:{type: Schema.ObjectId, ref: 'Adresse', required: true}
+  adresse:{type: Schema.ObjectId, ref: 'Adresse', required: false}
 });
 
 // Export the Mongoose model
